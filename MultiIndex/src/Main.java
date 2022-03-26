@@ -11,13 +11,13 @@ public class Main {
     	Boolean printEmpty = false;
     	Boolean find = true;
     	String input;
+    	String path;
+    	
     	int num;
         
 		Scanner scanner = new Scanner(System.in);
 		
-		
-		readFile(index);
-        
+		        
         printMenu();
         
        
@@ -28,7 +28,7 @@ public class Main {
         	
         	switch (input) {
         	case "insert":
-        		System.out.print("Enter the element number: ");
+        		System.out.print("Enter the element to insert: ");
         		num =scanner.nextInt();
         		if(num < 0 || num > 999) {
         			System.out.println("Number must be between 0-999");
@@ -38,8 +38,13 @@ public class Main {
         		insert(index, num);
         		break;
         		
+        	case "file":
+        		System.out.print("Type the file path: ");
+        		path = scanner.next();
+        		insertFile(index,path);
+        		
         	case "delete":
-        		System.out.print("Enter the element number: ");
+        		System.out.print("Enter the element to delete: ");
         		num =scanner.nextInt();
         		if(num < 0 || num > 999) {
         			System.out.println("Number must be between 0-999");
@@ -50,7 +55,7 @@ public class Main {
         		break;
         		
         	case "lookup":
-        		System.out.print("Enter the element number: ");
+        		System.out.print("Enter the element to lookup: ");
         		num =scanner.nextInt();
         		if(num < 0 || num > 999) {
         			System.out.println("Number must be between 0-999");
@@ -144,6 +149,7 @@ public class Main {
 
     static void printMenu() {
     	System.out.println("(insert) to insert a new element");
+    	System.out.println("(file) to insert elements from a file");
     	System.out.println("(delete) to delete an element");
     	System.out.println("(lookup) to lookup an element");
     	System.out.println("(print) to print all levels");
@@ -152,9 +158,9 @@ public class Main {
     	
     }
     
-    static void readFile(handler ind) {
+    static void insertFile(handler ind, String path) {
     	try {
-        	File file = new File("C:/Users/hazem/eclipse-workspace/MultiIndex/src/random_numbers.txt");
+        	File file = new File(path);
         	Scanner fileReader = new Scanner(file);
         	while(fileReader.hasNextLine()) {
         		int temp = fileReader.nextInt();
@@ -164,7 +170,7 @@ public class Main {
     	} 
     	
     	catch(FileNotFoundException e) {
-    		e.printStackTrace();
+    		System.out.println("Coulnd't find the file.");
     		
     	}
     }
