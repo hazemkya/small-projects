@@ -2,7 +2,9 @@ This is an implementation of a multi-level index using ArrayLists and LinkedList
 
 ##### Demo:
 
-![](C:\Users\hazem\AppData\Roaming\marktext\images\2022-03-26-17-16-44-image.png)
+<div>
+<img src="demo.png"/>
+</div>
 
 ##### Functionality:
 
