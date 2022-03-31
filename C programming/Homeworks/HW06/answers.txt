@@ -1,0 +1,60 @@
+Part1:
+
+	1) double *temperatures = (double *) malloc(365 * sizeof(double));
+
+	2)char *q = (char*) malloc(14*sizeof(char));
+		if( q != 0)
+	    	strcpy(q, "So many books");
+
+	3) int **grades = (int **) malloc(2 * sizeof(int*));
+		if( grades != 0 ){
+		    grades[0] = (int *) malloc(3 * sizeof(int));
+		    grades[1] = (int *) malloc(3 * sizeof(int));
+		}
+
+		if((grades[0] != 0) && (grades[1] != 0)){
+	    grades[0][0] = 36; grades[0][1] = 24; grades[0][2] = 26;
+	    grades[1][0] = 81; grades[1][1] = 30; grades[1][2] = 74;
+		}
+
+	4) float *zeros = (float *) calloc( 4, sizeof(float));
+
+	5) char **names = (char**) malloc(2*sizeof(char*));
+		int i;
+		if( names != 0 ){
+		    names[0] = (char *) malloc(4 * sizeof(char));
+		    names[1] = (char *) malloc(5 * sizeof(char));
+		}
+		if((names[0] != 0) && (names[1] != 0)){
+		    strcpy(names[0], "Ali");
+		    strcpy(names[1], "Omar");
+		}
+
+part2:
+	
+	1)Runtime error:
+		because p is a static pointer, if p where to be used again it might cause an error.
+
+		Fix:
+		char *p = (char*) malloc(12*sizeof(char));
+		if( p != 0)
+			strcpy(q, "Hello world");
+		printf("%d\n", *p);
+		free(p);
+
+	2)Runtime error:
+		becuase 'int* q = (int*)realloc(p, 5*sizeof(int));' already frees p, trying to free p again might cause a memory corruption.
+
+		Fix:
+			Remove 'free(p)'.
+			OR re-allocate manually using memalloc then memcpy.
+
+	3)Runtime error:
+		Since we have an array of pointers, using 'free(p)' will only free the array pointer not it's contents.
+
+		Fix:
+
+		free(p[0]); free(p[1]); free(p);
+   		
+
+

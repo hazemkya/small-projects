@@ -1,0 +1,11 @@
+1:
+	struct point { float x; float y; };
+2:
+	typedef struct { int x; int y; } point;
+3:
+	struct point { int x; int y; } p;
+	struct point parr[10];
+4:
+	struct { int x; int y; } parr[10];
+5:
+	Enum OSType {osAndroid, osWindows, osIOS};

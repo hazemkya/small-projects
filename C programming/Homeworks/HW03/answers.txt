@@ -1,0 +1,89 @@
+Question 1:
+	Part 1:
+	error, n is negative
+	...
+	Part 2:
+	DESSERTS
+	----------------------------------
+	Part 3:
+	value of a: 10
+	value of a: 11
+	value of a: 12
+	value of a: 13
+	value of a: 14
+	value of a: 16
+	value of a: 17
+	value of a: 18
+	value of a: 19
+	----------------------------------
+	Part 4:
+	-3      -3
+
+Question 2:
+	#include <stdio.h>
+
+	int main(){
+		char ch = getchar();
+		if (ch >= 65 && ch <= 90)		 /* test if ch is a capital letter */     
+			printf("%c is a capital letter\n", ch);
+	   		else if (ch >= 97 && ch <= 122)	 /* test if ch is a small letter */       
+	   			printf("%c is a small letter\n", ch);
+	        	else if (ch >= 48 && ch <= 57)	 /* test if ch is a digit */         
+	       			printf("%c is a digit\n", ch);
+	               	else if (ch == 43 || ch == 45 || ch == 42 || ch == 47 || ch == 37) /* test if ch is an arithmetic operator */           
+	        			printf("%c is an arithmetic operator\n", ch);
+	                 	else  
+	                 		printf("Unrecognized character");   
+		return 0; 
+	}
+
+Question 3:
+	Part 1:
+	value of a: 10
+	value of a: 11
+	value of a: 12
+	value of a: 13
+	value of a: 14
+	value of a: 16
+	value of a: 17
+	value of a: 18
+	value of a: 19
+
+	Part 1 count: 9
+	----------------------------------
+	Part 2:
+	900 300 100 33
+
+	Part 2 count: 4
+	----------------------------------
+	Part 3:
+	0 3
+
+	Part 3 count: 2
+	----------------------------------
+	Part 4:
+	198
+	.
+	.
+	.
+	6
+	4
+	2
+
+	Part 4 count: 99
+	----------------------------------
+	Part 5:
+	255 127 63 31 15 7 3 1
+
+	Part 5 count: 8
+	----------------------------------
+	Part 6:
+	128 64 32 16 8 4 2 1
+
+	Part 6 count: 8
+	----------------------------------
+	Part 7:
+	1 2 4 8 16 32 64 128
+	
+	Part 7 count: 8
+	----------------------------------
