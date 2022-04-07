@@ -1,0 +1,32 @@
+q1:
+	int account, amount;
+	char company[25];
+
+	1) We want to write some information to the file "payments.dat":
+	fptr = fopen("payments.dat", "w");
+	printf(fptr, "%d%s%d\n", account, company, amount);
+
+	2)
+	fopen("receive.dat", "r+");
+
+	3)
+	fptr = fopen("payments.dat", "r"); 
+	scanf(fptr, "%d%s%d\n", &account, company, &amount); 
+
+	4) We want to open the file "tools.dat" and add some data:
+	if ((fptr = fopen("tools.dat", "a"))){ /* statements */ } 
+
+q2:
+	int accountNum; float currentBalance, dollarAmount; char name[50];
+	1:
+		FILE* ofPtr = fopen("oldmast.dat", "r");
+	2:
+		FILE* tfPtr = fopen("trans.dat", "r");
+	3:
+		FILE* nfPtr = fopen("newmat.dat", "w");
+	4:
+		fscanf(ofPtr, "%d%s%f",&accountNum, name, &currentBalance);
+	5:
+		fscanf(tfPtr, "%d%f",&accountNum, &dollarAmount);
+	6:
+		fprintf(nfPtr, "%d%s%f",accountNum, name, currentBalance);
