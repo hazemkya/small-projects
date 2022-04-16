@@ -1,0 +1,9 @@
+Q2:
+	1:
+		a) float delta = pow(b,2) - 4 * a * c;
+		b) float x1 = (-b + sqrt(d)) / (2 * a);
+		c) float x2 = (-b - sqrt(d)) / (2 * a);
+
+	2:
+		a) float n = log(1 - x) / log(1.0 / 2);
+		b) float t = 12.26 * n;
