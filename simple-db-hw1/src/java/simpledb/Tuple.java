@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+import simpledb.TupleDesc.TDItem;
 
 
 /**
@@ -13,6 +17,9 @@ import java.util.Iterator;
  */
 public class Tuple implements Serializable {
 	//1- a tuple consists of an array of fields, TupleDesc and RecordId
+	private List<Field> fields = new ArrayList<Field>();
+    private TupleDesc tupleDesc;
+    private RecordId recordId;
 	
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +33,8 @@ public class Tuple implements Serializable {
     public Tuple(TupleDesc td) {
         // some code goes here
     	//2- assign td and initialize the array of fields
-    
+    	tupleDesc = td;
+    	fields = new ArrayList<Field>(tupleDesc.numFields());;
     }
 
     /**
@@ -34,7 +42,7 @@ public class Tuple implements Serializable {
      */
     public TupleDesc getTupleDesc() {
         // some code goes here
-        return null;
+        return tupleDesc;
     }
 
     /**
@@ -43,7 +51,7 @@ public class Tuple implements Serializable {
      */
     public RecordId getRecordId() {
         // some code goes here
-        return null;
+        return recordId;
     }
 
     /**
@@ -54,11 +62,11 @@ public class Tuple implements Serializable {
      */
     public void setRecordId(RecordId rid) {
         // some code goes here
-    	
+    	recordId = rid;
     }
 
     /**
-     * Change the value of the ith field of this tuple.
+     * Change the value of the i_th field of this tuple.
      *
      * @param i
      *            index of the field to change. It must be a valid index.
@@ -68,18 +76,25 @@ public class Tuple implements Serializable {
     public void setField(int i, Field f) {
         // some code goes here
     	// 3- set Field of i index to f
-   
+    	if (i < 0) return;
+    	if(i > fields.size()) return;
+    	
+    	fields.add(i, f);
     }
 
     /**
-     * @return the value of the ith field, or null if it has not been set.
+     * @return the value of the i_th field, or null if it has not been set.
      *
      * @param i
      *            field index to return. Must be a valid index.
      */
     public Field getField(int i) {
         // some code goes here
-        return null;
+    	if(fields.isEmpty())return null;
+    	if (i < 0) return null;
+    	if (i > fields.size() ) return null;
+
+        return fields.get(i);
     }
 
     /**
@@ -93,7 +108,15 @@ public class Tuple implements Serializable {
     public String toString() {
     	
         // some code goes here
-        throw new UnsupportedOperationException("Implement this");
+    	if(fields.isEmpty()) return null;
+    	
+    	StringBuilder str = new StringBuilder();
+    	
+    	for (int i = 0; i < fields.size(); i++) {
+			str.append(fields.get(i)+"\t");
+		}
+    	
+       return str.toString();
     }
 
     /**
@@ -104,7 +127,8 @@ public class Tuple implements Serializable {
     {
         // some code goes here
     	// 4- return an iterator of fields
-    	return null;
+    	ListIterator<Field> iter = fields.listIterator();
+    	return iter;
 
     }
 
@@ -115,5 +139,6 @@ public class Tuple implements Serializable {
     {
         // some code goes here
     	//5- reassign TupleDesc to td
+    	tupleDesc = td;
     }
 }

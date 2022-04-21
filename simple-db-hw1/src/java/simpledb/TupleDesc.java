@@ -48,8 +48,8 @@ public class TupleDesc implements Serializable {
     public Iterator<TDItem> iterator() {
         // some code goes here
     	//return an iterator
-    	ListIterator<TDItem> lits = items.listIterator();
-    	return lits;
+    	ListIterator<TDItem> iter = items.listIterator();
+    	return iter;
     }
 
     private static final long serialVersionUID = 1L;
@@ -260,10 +260,10 @@ public class TupleDesc implements Serializable {
      */
     public String toString() {
         // some code goes here
-    	StringBuilder all = new StringBuilder();
+    	StringBuilder str = new StringBuilder();
     	for (int i = 0; i < numFields(); i++) {
-			all.append(getFieldType(i) + "("+ getFieldName(i) + "), ");
+			str.append(getFieldType(i) + "("+ getFieldName(i) + "), ");
 		}
-    	return all.toString();
+    	return str.toString();
     }
 }
