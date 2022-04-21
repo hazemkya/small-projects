@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class TupleDesc implements Serializable {
 	
-
+//Done
 //1- create a list of TDItems
 	
 	private List<TDItem> items = new ArrayList<TDItem>();
