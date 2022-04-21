@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -18,12 +19,18 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Catalog {
 	// 1- create data structures to maintain mapping of id and name to table info.
 	// Table info include: DbFile, name and PKey
+	private HashMap<Integer, DbFile> files;
+	private HashMap<Integer, String> names;
+	private HashMap<Integer, String> pKeys;
 	
 	/**
 	 * Constructor. Creates a new, empty catalog.
 	 */
 	public Catalog() {
 		// some code goes here
+		files = new HashMap<Integer, DbFile>();
+		names = new HashMap<Integer, String>();
+		pKeys = new HashMap<Integer, String>();
 	}
 
 	/**
@@ -40,8 +47,18 @@ public class Catalog {
 	 */
 	public void addTable(DbFile file, String name, String pkeyField) {
 		// some code goes here
-		// 1- add a table to the catalog	
-
+		// 1- add a table to the catalog
+		if(name == null) return;
+		if(names.containsValue(name)) {
+			// remove old file and pkey
+			int id = getTableId(name);
+			files.remove(id);
+			names.remove(id);
+			pKeys.remove(id);
+		}
+			files.put(file.getId(), file);
+			names.put(file.getId(), name);
+			pKeys.put(file.getId(), pkeyField);
 	}
 
 	public void addTable(DbFile file, String name) {
@@ -69,7 +86,16 @@ public class Catalog {
 		// some code goes here
 		// get table file id from its name
 		// if id not exist in catalog, throw NoSuchElementException
-		return 0;
+		if(name == null) 
+			throw new NoSuchElementException();
+
+		for (Map.Entry<Integer, String> entry : names.entrySet()) {
+			Integer key = entry.getKey();
+			String val = entry.getValue();
+			if(val.equals(name)) return key;
+		}
+		
+		throw new NoSuchElementException();
 	}
 
 	/**
@@ -82,8 +108,12 @@ public class Catalog {
 	public TupleDesc getTupleDesc(int tableid) throws NoSuchElementException {
 		// some code goes here
 		// return TupleDesc given tableid, throw exception if not exist
-
-		return null;
+		if(!files.containsKey(tableid)) 
+			throw new NoSuchElementException();
+		
+		DbFile table = files.get(tableid);
+	
+		return table.getTupleDesc();
 	}
 
 	/**
@@ -96,32 +126,44 @@ public class Catalog {
 	public DbFile getDatabaseFile(int tableid) throws NoSuchElementException {
 		// some code goes here
 		// return file given tableid, throw exception if not exist
-
-		return null;
+		if(!files.containsKey(tableid)) 
+			throw new NoSuchElementException();
+		
+		return files.get(tableid);
 	}
 
 	public String getPrimaryKey(int tableid) {
 		// some code goes here
 		// return Pkey given tableid, throw exception if not exist
-		return null;
+		if(!pKeys.containsKey(tableid)) 
+			throw new NoSuchElementException();
+		
+		return pKeys.get(tableid);
+
 
 	}
 
 	public Iterator<Integer> tableIdIterator() {
 		// some code goes here
 		// return an iterator over all ids in catalog
-		return null;
+		Iterator<Integer> iter = files.keySet().iterator();
+		
+		return iter;
 	}
 
 	public String getTableName(int id) {
 		// some code goes here
-		return null;
+		
+		return names.get(id);
 	}
 
 	/** Delete all tables from the catalog */
 	public void clear() {
 		// some code goes here
 		// clear the catalog
+		files.clear();
+		names.clear();
+		pKeys.clear();
 	}
 
 	/**
